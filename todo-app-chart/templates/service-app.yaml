@@ -10,5 +10,5 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: {{ .Values.app.port | default 5000 }}
-      nodePort: {{ .Values.service.appNodePort | default 30080 }}
+      nodePort: {{ .Values.service.appNodePort | default 30081 }}
 
