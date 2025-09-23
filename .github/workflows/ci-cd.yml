@@ -27,3 +27,22 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/todo-app:latest
 
+
+      - name: Set up Kubeconfig
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
+
+
+      - name: Install Helm
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+
+      - name: Deploy with Helm
+        run: |
+          helm upgrade --install todo ./todo-app-chart \
+            --set app.image=${{ secrets.DOCKER_USERNAME }}/todo-app \
+            --set app.tag=latest \
+            --set db.password=${{ secrets.DB_PASSWORD }} \
+            --namespace default
