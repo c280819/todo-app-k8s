@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-app
+spec:
+  replicas: {{ .Values.app.replicas | default 1 }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-app
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-app
+    spec:
+      containers:
+        - name: todo-app
+          image: "{{ .Values.app.image }}:{{ .Values.app.tag }}"
+          ports:
+            - containerPort: {{ .Values.app.port | default 5000 }}
+          env:
+            - name: DB_HOST
+              value: {{ .Release.Name }}-db
+            - name: DB_USER
+              value: {{ .Values.db.user }}
+            - name: DB_PASSWORD
+              value: {{ .Values.db.password }}
+            - name: DB_NAME
+              value: {{ .Values.db.database }}
+
