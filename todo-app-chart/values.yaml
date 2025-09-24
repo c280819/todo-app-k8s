@@ -20,7 +20,7 @@ storage:
 # Services
 service:
   appType: NodePort
-  appNodePort: 30081
+  appNodePort: 30082
   dbType: ClusterIP
  
 httpRoute:
