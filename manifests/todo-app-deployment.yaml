@@ -14,12 +14,12 @@ spec:
     spec:
       containers:
         - name: todo-app
-          image: komalvede/todo-app:latest   # docker build करून push केलेलं image इथे द्यायचं
+          image: komalvede/todo-app:latest 
           ports:
             - containerPort: 5000
           env:
             - name: DB_HOST
-              value: todo-db-service   # Service name वापरलाय
+              value: todo-db-service  
             - name: DB_USER
               value: todo_user
             - name: DB_PASSWORD
